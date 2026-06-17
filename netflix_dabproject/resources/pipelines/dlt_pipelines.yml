@@ -1,0 +1,12 @@
+resources:
+  pipelines:
+    pipeline_dlt_pipeline:
+      name: dlt_pipeline1
+      libraries:
+        - glob:
+            include: ../../src/dlt_pipelines/DLT_Pipeline/transformations/**
+      schema: gold1
+      photon: true
+      catalog: ${var.catalog_name}
+      serverless: true
+      root_path: ../../src/dlt_pipelines/DLT_Pipeline.ipynb

@@ -1,0 +1,19 @@
+variables:
+  weekday:
+    description: weekday of month.
+    default: 7
+
+  source_folder:
+    description: name of source folder.
+    default: netflix_cast
+
+  target_folder:
+    description: name of destination folder.
+    default: netflix_cast
+
+  catalog_name:
+    description: name of catalog.
+    default: netflix_cata
+
+  
+
