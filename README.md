@@ -5,8 +5,10 @@ project Discription ADF pipeline:
       ![Architecture](rawdataset/architecture.png)
 
 databricks Job:
+  use auto loader for increment data processing,and reads files dynamically and process the data in silver layer
       ![Architecture](rawdataset/architecture1.png)
 
-DLT pipeline for gold layer
+DLT pipeline for gold layer:
+  structured data stored in gold layer...by using DLT pipelines
       ![Architecture](rawdataset/architecture2.png)
 
