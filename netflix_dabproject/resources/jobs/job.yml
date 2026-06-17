@@ -1,0 +1,61 @@
+resources:
+  jobs:
+    New_Job_2026_06_17_17_22_06:
+      name: netflix_end_to_end_project
+      tasks:
+        - task_key: autoloader
+          notebook_task:
+            notebook_path: ../../src/notebooks/auto_loader1.ipynb
+            source: WORKSPACE
+        - task_key: lookup_notebook1
+          depends_on:
+            - task_key: autoloader
+          notebook_task:
+            notebook_path: ../../src/notebooks/lookup_notebook2.ipynb
+            source: WORKSPACE
+        - task_key: master_lookup_notebook
+          depends_on:
+            - task_key: autoloader
+          notebook_task:
+            notebook_path: ../../src/notebooks/master_lookup_notebook.ipynb
+            base_parameters:
+              weekday: ${var.weekday}
+            source: WORKSPACE
+        - task_key: IFweekDay
+          depends_on:
+            - task_key: master_lookup_notebook
+          condition_task:
+            op: EQUAL_TO
+            left: "{{tasks.master_lookup_notebook.values.weekoutput}}"
+            right: "7"
+        - task_key: master_silver
+          depends_on:
+            - task_key: IFweekDay
+              outcome: "true"
+          notebook_task:
+            notebook_path: ../../src/notebooks/silver_master_notebook4.ipynb
+            source: WORKSPACE
+        - task_key: Not_weekday
+          depends_on:
+            - task_key: IFweekDay
+              outcome: "false"
+          notebook_task:
+            notebook_path: ../../src/notebooks/false_notebook.ipynb
+            source: WORKSPACE
+        - task_key: silver_notebook1
+          depends_on:
+            - task_key: lookup_notebook1
+          for_each_task:
+            inputs: "{{tasks.lookup_notebook1.values.my_arr}}"
+            task:
+              task_key: silver_notebook1_iteration
+              notebook_task:
+                notebook_path: ../../src/notebooks/silver_notebook3.ipynb
+                base_parameters:
+                  source_folder: ${var.source_folder}
+                  target_folder: ${var.target_folder}
+                source: WORKSPACE
+      queue:
+        enabled: true
+      performance_target: PERFORMANCE_OPTIMIZED
+
