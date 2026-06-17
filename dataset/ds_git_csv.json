@@ -1,0 +1,30 @@
+{
+	"name": "ds_git_csv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_git",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"file_name": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": {
+					"value": "/vijaykumarkadam/azure_end_to_end_netflix_dlt_assetBundle_project/refs/heads/main/rawdataset/@{dataset().file_name}",
+					"type": "Expression"
+				}
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
