@@ -1,0 +1,15 @@
+{
+	"name": "adfForNetflixProject",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "westus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "7c2d6e59-7119-4e8e-a4db-27d59c30821a",
+		"tenantId": "d5f329f6-e66d-4b04-b87b-e28e22ee1aaf"
+	}
+}
